@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <form method="POST" action="/add">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="age" placeholder="Age" required>
+            <input type="text" name="blood_group" placeholder="Blood Group" required>
+            <input type="text" name="contact" placeholder="Contact" required>
+            <input type="text" name="bp" placeholder="Blood Pressure" required>
+            <input type="text" name="sugar" placeholder="Sugar Level" required>
+            <input type="number" step="0.1" name="weight" placeholder="Weight (kg)" required>
+            <button type="submit">Add Donor</button>
+            <a href="/search" class="button" style="float:right; margin-bottom: 10px;">🔍 Search Donor</a>
+
+        </form>
+
+        <h2>Registered Donors</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th><th>Age</th><th>Blood Group</th>
+                    <th>Contact</th><th>BP</th><th>Sugar</th><th>Weight</th><th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donor in donors %}
+                <tr>
+                    <td>{{ donor[1] }}</td>
+                    <td>{{ donor[2] }}</td>
+                    <td>{{ donor[3] }}</td>
+                    <td>{{ donor[4] }}</td>
+                    <td>{{ donor[5] }}</td>
+                    <td>{{ donor[6] }}</td>
+                    <td>{{ donor[7] }}</td>
+                    <td>
+                        <a href="/delete/{{ donor[0] }}" onclick="return confirm('Delete this donor?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

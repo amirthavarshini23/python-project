@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Donors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Search Donors by Blood Group</h1>
+
+        <!-- 🔍 Search Form -->
+        <form method="GET" action="/search">
+            <input type="text" name="blood_group" placeholder="e.g. A+, B-, O+" required>
+            <button type="submit">Search</button>
+            <a href="/dashboard" style="margin-left: 10px;">Back to Dashboard</a>
+        </form>
+
+        {% if donors is not none %}
+            <h2>Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th><th>Age</th><th>Blood Group</th>
+                        <th>Contact</th><th>BP</th><th>Sugar</th><th>Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donor in donors %}
+                    <tr>
+                        <td>{{ donor[1] }}</td>
+                        <td>{{ donor[2] }}</td>
+                        <td>{{ donor[3] }}</td>
+                        <td>{{ donor[4] }}</td>
+                        <td>{{ donor[5] }}</td>
+                        <td>{{ donor[6] }}</td>
+                        <td>{{ donor[7] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7">No donors found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
